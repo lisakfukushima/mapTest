@@ -182,6 +182,19 @@
 
             
         };
+        
+        //Move Current
+        $scope.currentPos = function()
+        {
+            var suc = function(p) {
+                var latlng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
+                $scope.map.panTo(latlng);
+            };
+            var locFail = function() {
+                alert("Error");
+            };
+            navigator.geolocation.getCurrentPosition(suc, locFail);
+        }
     });
 })();
 
