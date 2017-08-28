@@ -204,5 +204,21 @@
         }
 
     });
+    
+    app.controller('timerController', function($scope, $interval){
+        $scope.count = 0;
+        var timer;
+        $scope.start = function() {
+            timer = $interval(function() {
+                $scope.count++;
+                alert($scope.count);
+            }, 1000);
+        };
+        $scope.stop = function() {
+            alert("stop");
+            $interval.cancel(timer);
+        };
+    });
+    
 })();
 
