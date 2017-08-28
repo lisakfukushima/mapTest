@@ -29,9 +29,9 @@
         //Map initialization  
         $timeout(function(){
       
-            var latlng = new google.maps.LatLng(35.7042995, 139.7597564);
+            var latlng = new google.maps.LatLng(35.603351, 139.377580); //Lisa本社位置
             var myOptions = {
-                zoom: 8,
+                zoom: 15,
                 center: latlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
@@ -40,8 +40,15 @@
             $scope.overlay.draw = function() {}; // empty function required
             $scope.overlay.setMap($scope.map);
             $scope.element = document.getElementById('map_canvas');
+            
+            //現在位置へ
+            $scope.moveCurrentPos();
+            
+            //イベント
             $scope.hammertime = Hammer($scope.element).on("hold", function(event) {
                 $scope.addOnClick(event);
+                
+            
             });
             
         },100);
@@ -184,17 +191,18 @@
         };
         
         //Move Current
-        $scope.currentPos = function()
+        $scope.moveCurrentPos = function()
         {
             var suc = function(p) {
                 var latlng = new google.maps.LatLng(p.coords.latitude, p.coords.longitude);
-                $scope.map.panTo(latlng);
+                $scope.map.setCenter(latlng);
             };
             var locFail = function() {
                 alert("Error");
             };
             navigator.geolocation.getCurrentPosition(suc, locFail);
         }
+
     });
 })();
 
