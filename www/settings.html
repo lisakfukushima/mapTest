@@ -10,9 +10,13 @@
         <div style="text-align: center">
             <h1>Settings</h1>
             <ons-button onclick="slidingMenu.setMainPage('map.html')">Back</ons-button>
-            
+            <br /><br />
+             
             <ons-button ng-controller="timerController" ng-click="start()">start</ons-button>
             <ons-button ng-controller="timerController" ng-click="stop()">stop</ons-button>
+            <br /><br />
+            
+            <ons-button ng-click="getCurrentPos()">getCurrentPos</ons-button>
         </div>
     </ons-page>
 </ons-navigator>
