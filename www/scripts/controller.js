@@ -258,9 +258,19 @@
         };
     });
     
+    //Debug
+    app.controller('debugController', function($scope){
+      
+        $scope.openBrowser = function(){
+            alert("");
+            var ref = cordova.InAppBrowser.open('https://docs.google.com/spreadsheets/d/1xHvXhAFNFuNphes00pRdYBC9FyiZFSXKMJRqzpGCdqI/edit?usp=sharing', '_blank', 'location=yes');
+        }
+    });
     
     
 })();
+
+
 
 // all clear
 function localStorageClear()
