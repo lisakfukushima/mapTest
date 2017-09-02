@@ -1,4 +1,4 @@
-<ons-navigator ng-controller="debugController">
+<ons-navigator ng-controller="MapController">
     <ons-page>
    
     
@@ -16,7 +16,14 @@
             
             <ons-button onclick="cloudUpload()">CloudUpload</ons-button>
             <br /><br />
+
+            <ons-button ng-controller="timerController" ng-click="start()">start</ons-button>
+            <ons-button ng-controller="timerController" ng-click="stop()">stop</ons-button>
+            <br />
             
+            <ons-button ng-click="getCurrentPos()">getCurrentPos</ons-button>
+            <br /><br />
+
             <ons-button onclick="localStorageClear()">localStorageClear</ons-button>
             <br /><br />
              
