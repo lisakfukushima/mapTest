@@ -2,8 +2,14 @@
     <ons-list>
         <ons-list-item
             modifier="tappable" class="list__item__line-height"
-            onclick="slidingMenu.setMainPage('map.html', {closeMenu: true})">
+            onclick="slidingMenu.setMainPage('top.html', {closeMenu: true})">
             <i class="fa fa-home fa-lg" style="color: #666"></i>
+            &nbsp; Top
+        </ons-list-item>
+        <ons-list-item
+            modifier="tappable" class="list__item__line-height"
+            onclick="slidingMenu.setMainPage('map.html', {closeMenu: true})">
+            <i class="fa fa-map-marker fa-lg" style="color: #666"></i>
             &nbsp; Map
         </ons-list-item>
         <ons-list-item
@@ -15,7 +21,7 @@
         <ons-list-item
             modifier="tappable" class="list__item__line-height"
             onclick="slidingMenu.setMainPage('debug.html', {closeMenu: true})">
-            <i class="fa fa-glass fa-lg" style="color: #666"></i>
+            <i class="fa fa-ban fa-lg" style="color: #666"></i>
             &nbsp; Debug
         </ons-list-item>
     </ons-list>

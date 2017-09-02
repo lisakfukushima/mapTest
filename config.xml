@@ -98,4 +98,7 @@
   </platform>
   <preference name="WindowsStorePublisherName" value="My Name"/>
   <preference name="WindowsStoreIdentityName" value="95b20378-37d4-3eb9-4f77-1d933d2e5d56"/>
+  <preference name="monaca:MonacaBackendUrl" value="https://cloud.monaca.mobi/json-rpc/"/>
+  <preference name="monaca:MonacaBackendId" value="59a9d6f4ff2af2895773f18c"/>
+  <preference name="monaca:MonacaBackendApiKey" value="ef7181d2aa2e65723fb0ad3248430006062754a81bc00626d9ca5a5c129978ae"/>
 </widget>

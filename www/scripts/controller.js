@@ -161,6 +161,8 @@
             var point = new google.maps.Point(x, y);            
             var coordinates = $scope.overlay.getProjection().fromContainerPixelToLatLng(point);       
          
+            RegistpointAdd(coordinates);
+         
             var marker = new google.maps.Marker({
                 position: coordinates,
                 map: $scope.map
@@ -228,7 +230,7 @@
                 locationAdd(latlng);
 //                list = locationGet();
 //                var lat = list[list.length-1].pos;
-                alert(latlng.toString());
+//                alert(latlng.toString());
             };
             var locFail = function() {
                 alert("Error");
@@ -238,6 +240,7 @@
 
     });
     
+    //Timer
     app.controller('timerController', function($scope, $interval, SharedScopes){
         
         //共有
@@ -246,11 +249,14 @@
         $scope.count = 0;
         var timer;
         $scope.start = function() {
+            if($scope.count != 0)
+                return;
+            
             timer = $interval(function() {
                 $scope.count++;
-//                alert($scope.count);
+                //alert($scope.count);
                 SharedScopes.getScope("MapController").getCurrentPos();
-            }, 3000);
+            }, 5000);
         };
         $scope.stop = function() {
             alert("stop");
@@ -258,11 +264,26 @@
         };
     });
     
+    //Top用
+    app.controller('topController', function($scope, SharedScopes){
+      
+        //共有
+        SharedScopes.setScope('topController', $scope);
+      
+        $scope.init = function () {
+//            alert("timerInit");
+//            SharedScopes.getScope("timerController").start();
+//            alert("");
+//            var list = document.getElementById('TopListView');
+//            list.empty();
+//               aa();
+    	}
+    });
+    
     //Debug
     app.controller('debugController', function($scope){
       
         $scope.openBrowser = function(){
-            alert("");
             var ref = cordova.InAppBrowser.open('https://docs.google.com/spreadsheets/d/1xHvXhAFNFuNphes00pRdYBC9FyiZFSXKMJRqzpGCdqI/edit?usp=sharing', '_blank', 'location=yes');
         }
     });
@@ -275,6 +296,7 @@
 // all clear
 function localStorageClear()
 {
+    alert("localStorageClear");
     localStorage.clear();
 }
 
@@ -319,3 +341,72 @@ function locationClear()
 {
     localStorage.removeItem("location_list");
 }
+
+//Registpoint
+function RegistpointGet()
+{
+    var list = localStorage.getItem("Registpoint_list");
+    if (list == null) {
+        return new Array();
+    } else {
+        return JSON.parse(list);
+    }
+}
+function RegistpointSave(list)
+{
+    try {
+        localStorage.setItem("Registpoint_list", JSON.stringify(list));
+    } catch (e) {
+        alert('Error saving to storage.');
+        throw e;
+    }
+}
+function RegistpointAdd(pos)
+{
+  var list = RegistpointGet();
+  var time = new Date().getTime();
+  list.push({ id: time, time: time, pos: pos });
+  RegistpointSave(list);
+}
+function RegistpointDel(id)
+{
+    var list = RegistpointGet();
+    for (var i in list) {
+        if (list[i].id == id) {
+            list.splice(i, 1);
+            break;
+        }
+    }
+    RegistpointSave(list);
+}
+function RegistpointClear()
+{
+    localStorage.removeItem("Registpoint_list");
+}
+
+
+//Cloud
+var MC = monaca.cloud;
+
+function cloudUpload()
+{
+    var location = MC.Collection("Location");
+    
+    var list = locationGet();
+    for (var i in list) {
+        location.insert(list[i]);
+    }
+    locationClear();
+    
+    var registpoint = MC.Collection("Registpoint");
+    var regist = RegistpointGet();
+    for (var i in regist) {
+        registpoint.insert(regist[i]);
+    }
+    RegistpointClear();
+}
+
+
+
+
+

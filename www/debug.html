@@ -1,4 +1,4 @@
-<ons-navigator ng-controller="MapController">
+<ons-navigator ng-controller="debugController">
     <ons-page>
    
     
@@ -10,12 +10,17 @@
         </ons-toolbar>
         
         <div style="text-align: center">
-            <h1>Settings</h1>
-            <ons-button onclick="slidingMenu.setMainPage('map.html')">Back</ons-button>
+            <h1>デバッグ</h1>
+            <ons-button onclick="slidingMenu.setMainPage('map.html')">Map</ons-button>
+            <br /><br />
+            
+            <ons-button onclick="cloudUpload()">CloudUpload</ons-button>
+            <br /><br />
+            
+            <ons-button onclick="localStorageClear()">localStorageClear</ons-button>
             <br /><br />
              
-             
-            <ons-button ng-controller="debugController" ng-click="openBrowser()">openBrowser</ons-button>
+            <ons-button ng-controller="debugController" ng-click="openBrowser()">健康管理</ons-button>
             <br /><br />
             
         </div>
